@@ -1,8 +1,10 @@
+import "package:expenses_tracker/widget/expenses_chart.dart";
 import 'package:flutter/material.dart';
 import "package:expenses_tracker/data/expenses.dart";
 import "package:expenses_tracker/model/expense.dart";
 import "package:expenses_tracker/widget/add_expense_modal.dart";
 import "package:expenses_tracker/widget/expense_list.dart";
+import "package:flutter/widgets.dart";
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -53,6 +55,7 @@ class _HomePageState extends State<HomePage> {
 
   void _openAddExpenseModal(BuildContext context) {
     showModalBottomSheet(
+        useSafeArea: true,
         isScrollControlled: true,
         context: context,
         builder: (ctx) => AddExpenseModal(onAddExpense: _addExpenses));
@@ -73,6 +76,11 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        body: ExpenseList(expenses: expenses, onDeleteExpense: _deleteExpense));
+        body: Column(children: [
+          CustomExpenseChart(expenses: expenses),
+          Expanded(
+              child: ExpenseList(
+                  expenses: expenses, onDeleteExpense: _deleteExpense))
+        ]));
   }
 }
