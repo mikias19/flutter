@@ -9,12 +9,18 @@ import "package:meal/Screens/meal_details_screen.dart";
 
 class MealsScreen extends StatelessWidget {
   final List<Meal> meals;
-  final String categoryTitle;
-  MealsScreen({super.key, required this.meals, required this.categoryTitle});
+  final String? categoryTitle;
+  final void Function(Meal meal) toogleFavorite;
+  MealsScreen(
+      {super.key,
+      required this.meals,
+      this.categoryTitle,
+      required this.toogleFavorite});
 
   void selectingMealDetail(BuildContext context, Meal meal) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (_) => MealDetailScreen(meal: meal)));
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (_) =>
+            MealDetailScreen(meal: meal, onToogleFavorite: toogleFavorite)));
   }
 
   @override
@@ -40,10 +46,11 @@ class MealsScreen extends StatelessWidget {
       ]));
     }
 
+    if (categoryTitle != "") return content;
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          categoryTitle,
+          categoryTitle!,
           style: Theme.of(context)
               .textTheme
               .titleLarge!
