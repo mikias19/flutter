@@ -4,6 +4,7 @@ import 'package:meal/Datas/meal_data.dart';
 import 'package:meal/Models/meal.dart';
 import "package:meal/Screens/category_screen.dart";
 import 'package:meal/Screens/meal_screen.dart';
+import "package:meal/Widgts/drawer_handler.dart";
 
 class TabScreen extends StatefulWidget {
   @override
@@ -21,11 +22,18 @@ class _TabScreenState extends State<TabScreen> {
   void _onToogleFavorite(Meal meal) {
     final isExisting = favorites.contains(meal);
 
+    void showMessage(String text) {
+      ScaffoldMessenger.of(context).clearSnackBars();
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(text)));
+    }
+
     setState(() {
       if (isExisting) {
         favorites.remove(meal);
+        showMessage("Meal is Removed");
       } else {
         favorites.add(meal);
+        showMessage("Meal is Added");
       }
     });
   }
@@ -36,6 +44,12 @@ class _TabScreenState extends State<TabScreen> {
       category: categories,
       toogleFavorite: _onToogleFavorite,
     );
+
+    if (_currentIndex == 1) {
+      activePage =
+          MealsScreen(meals: favorites, toogleFavorite: _onToogleFavorite);
+      activeTitle = "Meals";
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -46,22 +60,15 @@ class _TabScreenState extends State<TabScreen> {
               .copyWith(color: Theme.of(context).primaryColorDark),
         ),
       ),
+      drawer: DrawerHandler(),
       body: activePage,
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
         onTap: (index) {
-          if (_currentIndex == 0) {
-            activePage = CategoryScreen(
-              category: categories,
-              toogleFavorite: _onToogleFavorite,
-            );
-            activeTitle = "Your Category";
-          } else {
-            activePage = MealsScreen(
-                meals: favorites, toogleFavorite: _onToogleFavorite);
-            activeTitle = "Meals";
-          }
+          setState(() {
+            _currentIndex = index;
+          });
         },
         items: const [
           BottomNavigationBarItem(
