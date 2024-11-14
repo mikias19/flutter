@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "754546273569",
+    "project_id": "mauth-995af",
+    "storage_bucket": "mauth-995af.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:754546273569:android:965c008acca8f5ff2d6260",
+        "android_client_info": {
+          "package_name": "com.example.block_training"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzFXkxYiuFPbCsA0QlwWeOCVEotDnvtpA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:754546273569:android:2e24fdb1dfe6fef12d6260",
+        "android_client_info": {
+          "package_name": "com.example.blocktraining"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzFXkxYiuFPbCsA0QlwWeOCVEotDnvtpA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
